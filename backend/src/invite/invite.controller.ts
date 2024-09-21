@@ -9,7 +9,7 @@ export class InviteController {
 
   // Endpoint to get all invites to buddy 
   // Params require user_id of buddy logged in
-  @Get('recieved_invites')
+  @Get('/recieved_invites')
   public async getInviteRequests(@Query('user_id') user_id: UUID) 
   {
     return await this.serv.getInviteRequests(user_id);
@@ -29,5 +29,12 @@ export class InviteController {
   public async respondInviteRequest(@Body() respondInviteDTO: { invite_id: number; invite_response: number})
   {
     return await this.serv.respondInviteRequest(respondInviteDTO.invite_id,respondInviteDTO.invite_response);
+  }
+
+  // Route to get all buddys who have accepted requests
+  @Get('/get_all_accepted_buddys')
+  public async getAllAcceptedBuddys(@Query('user_id') user_id: UUID) 
+  {
+    return await this.serv.getAllAcceptedBuddys(user_id);
   }
 }

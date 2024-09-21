@@ -3,11 +3,15 @@ import {
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
+    OneToMany,
     CreateDateColumn,
     UpdateDateColumn,
     JoinColumn
   } from 'typeorm';
   import { User } from './user.entity'; 
+  
+import { UnlockRequests } from './unlock.requests.entity'; // Adjust the path as necessary
+
 import { UUID } from 'crypto';
   
   @Entity()
@@ -37,4 +41,7 @@ import { UUID } from 'crypto';
     @ManyToOne(() => User, user => user.buddyInvites, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'buddy_id' }) 
     buddy!: User; 
+
+    @OneToMany(() => UnlockRequests, unlockRequest => unlockRequest.invite)
+    unlockRequests: UnlockRequests[];
   }

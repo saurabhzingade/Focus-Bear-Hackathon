@@ -77,4 +77,18 @@ export class InviteService {
       throw new Error(err);
     }
   }
+
+  // Get all buddys for a user who have accepted invites
+  public async getAllAcceptedBuddys(user_id: string): Promise<Invite[]> {
+    try 
+    {
+      return await this.repo.find({where: { user_id: user_id, invite_response:1}, relations:['buddy']});
+    } 
+    catch (error) 
+    {
+      console.error('Error fetching invites:', error);
+      throw new Error('Could not fetch invites');
+    }
+  }
+  
 }

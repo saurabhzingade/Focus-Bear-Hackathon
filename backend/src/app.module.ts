@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { InviteModule } from './invite/invite.module';
+import { UnlockRequestsModule } from './unlock.request/unlock.request.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { InviteModule } from './invite/invite.module';
     }),
     UserModule,
     InviteModule,
+    UnlockRequestsModule
   ],
   controllers: [AppController],
   providers: [AppService],
