@@ -95,7 +95,7 @@ export default function Buddy() {
           <Text style={styles.selectedText}>
             Selected Buddy: {selectedBuddy}
           </Text>
-          <Button title="Send Friend Request" onPress={handleSendRequest} />
+          <Button title="Send Buddy Request" onPress={handleSendRequest} />
         </View>
       ) : null}
     </View>

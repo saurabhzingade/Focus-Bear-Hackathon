@@ -17,7 +17,7 @@ export class InviteService {
   public async getInviteRequests(user_id: string): Promise<Invite[]> {
     try 
     {
-      return await this.repo.find({where: { buddy: {user_id}}, relations:['buddy']});
+      return await this.repo.find({where: { user: {user_id}}, relations:['user']});
     } 
     catch (error) 
     {
