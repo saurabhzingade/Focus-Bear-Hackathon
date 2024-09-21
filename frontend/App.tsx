@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import Login from './components/Login';
 import Buddy from './components/Buddy';
@@ -17,6 +17,11 @@ import Profile from './components/Profile';
 
 const Tab = createBottomTabNavigator();
 const App = () => {
+  const [login, setLogin] = useState(false); // Assuming you toggle this with actual login
+
+  if (!login) {
+    return <Login />;
+  }
   return (
     <NavigationContainer>
       <Tab.Navigator>
