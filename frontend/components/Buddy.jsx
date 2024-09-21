@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
+import RNPickerSelect from 'react-native-picker-select';
+
 export default function Buddy() {
   const [buddies, setBuddies] = useState([]);
   const [selectedBuddy, setSelectedBuddy] = useState('');
@@ -22,16 +24,17 @@ export default function Buddy() {
 
   return (
     <View style={styles.container}>
-      <Text>Select User to add as buddy:</Text>
-      {/* {buddies.length
+      <Text>Select User to adda as buddy:</Text>
+
+      {buddies.length
         ? buddies.map(item => (
             <View>
-              <Text>{item.firstName}</Text>
-              <Text>{item.lastName}</Text>
-              <Text>{item.email}</Text>
+              <Text>
+                {item.firstName} {item.lastName}
+              </Text>
             </View>
           ))
-        : null} */}
+        : null}
     </View>
   );
 }
