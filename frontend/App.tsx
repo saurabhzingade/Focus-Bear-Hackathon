@@ -55,22 +55,6 @@ const App = () => {
       </View>
     );
   }
-
-  // return user === 'user' ? (
-  //   <NavigationContainer>
-  //     <Tab.Navigator>
-  //       <Tab.Screen name="Profile" component={Profile} />
-  //       <Tab.Screen name="Request Lock" component={RequestLock} />
-  //       <Tab.Screen name="Buddy Request" component={Buddy} />
-  //     </Tab.Navigator>
-  //   </NavigationContainer>
-  // ) : null;
-  // <NavigationContainer>
-  //   <Tab.Navigator>
-  //     <Tab.Screen name="Profile" component={Profile} />
-  //     <Tab.Screen name="Buddy Request" component={Buddy} />
-  //   </Tab.Navigator>
-  // </NavigationContainer>
 };
 
 export default App;
