@@ -1,16 +1,51 @@
-import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View, Text} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 
-import {View, Text} from 'react-native';
+export default function Buddy() {
+  const [buddies, setBuddies] = useState([]);
+  const [selectedBuddy, setSelectedBuddy] = useState('');
 
-const Tab = createBottomTabNavigator();
+  useEffect(() => {
+    const fetchBuddies = async () => {
+      try {
+        const response = await fetch('http://10.0.2.2:3000/user/buddys');
+        const data = await response.json();
+        setBuddies(data); // Assuming data is an array of buddy objects
+      } catch (error) {
+        console.error('Error fetching buddies:', error);
+      }
+    };
 
-const Buddy = () => {
+    fetchBuddies();
+  }, []);
+
   return (
-    <View>
-      <Text>THis is where the User can ask a buddy</Text>
+    <View style={styles.container}>
+      <Text>Select User to add as buddy:</Text>
+      {/* {buddies.length
+        ? buddies.map(item => (
+            <View>
+              <Text>{item.firstName}</Text>
+              <Text>{item.lastName}</Text>
+              <Text>{item.email}</Text>
+            </View>
+          ))
+        : null} */}
     </View>
   );
-};
+}
 
-export default Buddy;
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  picker: {
+    height: 50,
+    width: 250,
+  },
+  selectedText: {
+    marginTop: 20,
+    fontSize: 16,
+  },
+});
