@@ -13,6 +13,4 @@ DB="my_database";
 (docker rm $SERVER || :) && \
 
 # Start a new PostgreSQL container with the necessary environment variables
-docker run --name postgres -p 5433:5432 -h 127.0.0.1 -e POSTGRES_USER=$USER -e POSTGRES_PASSWORD=$PW -d postgres
-
-
+docker run --name postgres -p 5433:5432 -h 127.0.0.1 -e POSTGRES_USER=$USER -e POSTGRES_PASSWORD=$PW -v postgres_data:/var/lib/postgresql/data -d postgres
