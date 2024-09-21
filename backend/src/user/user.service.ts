@@ -7,8 +7,8 @@ import { Repository } from 'typeorm';
 export class UserService {
   constructor(@InjectRepository(User) private readonly repo: Repository<User>) { }
 
-  public async getAll() {
-    return await this.repo.find();
+  public async getAllBuddys() {
+    return await this.repo.find({ where: { role:"Buddy" },select: ['user_id','firstName','lastName', 'email'] });
   }
 
   async signup(username: string ,password: string,firstName: string,lastName:string,role:string,email:string): Promise<User> {
@@ -19,18 +19,25 @@ export class UserService {
     user.lastName = lastName;
     user.role = role;
     user.email = email;
+    try 
+    {
+      const existing_user1 = await this.repo.findOne({ where: { username:username } });
 
-    const existing_user1 = await this.repo.findOne({ where: { username:username } });
+      if(existing_user1)
+          throw new NotFoundException(`User with username '${username}' exists`);
 
-    if(existing_user1)
-        throw new NotFoundException(`User with username '${username}' exists`);
+      const existing_user2 = await this.repo.findOne({ where: { email:email } });
 
-    const existing_user2 = await this.repo.findOne({ where: { email:email } });
+      if(existing_user2)
+          throw new NotFoundException(`User with email '${email}' exists`);
 
-    if(existing_user2)
-        throw new NotFoundException(`User with email '${email}' exists`);
-
-    return this.repo.save(user);
+      return this.repo.save(user);
+    }
+    catch(err)
+    {
+      console.error('Error signing up:', err);
+      throw new Error(err);
+    }
   }
 
   async login(username: string, password: string): Promise<User> {

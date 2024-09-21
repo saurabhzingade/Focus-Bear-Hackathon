@@ -5,9 +5,12 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private serv: UserService) { }
 
-  @Get()
-  public async getAll() {
-    return await this.serv.getAll();
+  //Get request to find all buddys
+  //Not scalable. Can be replaced by a search query
+  @Get("/buddys")
+  public async getAllBuddys() 
+  {
+    return await this.serv.getAllBuddys();
   }
 
   @Post("/signup")

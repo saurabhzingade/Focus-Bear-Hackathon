@@ -1,5 +1,8 @@
-// base.entity.ts
-import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, Entity } from 'typeorm';
+
+import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, Entity, OneToMany  } from 'typeorm';
+
+import { Invite } from './invite.entity'; 
+
 
 @Entity()
 export class User {
@@ -29,4 +32,10 @@ export class User {
 
     @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     lastLoggedIn: Date;
+
+    @OneToMany(() => Invite, (invite) => invite.user)
+    invites: Invite[];
+
+    @OneToMany(() => Invite, (invite) => invite.buddy)
+    buddyInvites: Invite[];
 }
