@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   const [login, setLogin] = useState(true); // Assuming you toggle this with actual login
 
-  let user = 'user';
+  let user = 'buddy';
 
   if (!login) {
     return <Login />;
