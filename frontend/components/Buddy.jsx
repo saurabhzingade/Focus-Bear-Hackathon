@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
-
-import RNPickerSelect from 'react-native-picker-select';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 export default function Buddy() {
   const [buddies, setBuddies] = useState([]);
@@ -24,31 +21,65 @@ export default function Buddy() {
 
   return (
     <View style={styles.container}>
-      <Text>Select User to adda as buddy:</Text>
+      <Text style={styles.header}>Select User to Add as Buddy:</Text>
 
-      {buddies.length
-        ? buddies.map(item => (
-            <View>
-              <Text>
-                {item.firstName} {item.lastName}
-              </Text>
-            </View>
-          ))
-        : null}
+      {buddies.length ? (
+        buddies.map(item => (
+          <TouchableOpacity
+            key={item.user_id}
+            style={styles.buddyItem}
+            onPress={() =>
+              setSelectedBuddy(`${item.firstName} ${item.lastName}`)
+            } // Update selected buddy
+          >
+            <Text style={styles.buddyText}>
+              {item.firstName} {item.lastName}
+            </Text>
+          </TouchableOpacity>
+        ))
+      ) : (
+        <Text style={styles.noBuddiesText}>No buddies available.</Text>
+      )}
+
+      {selectedBuddy ? (
+        <Text style={styles.selectedText}>Selected Buddy: {selectedBuddy}</Text>
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 20,
+    backgroundColor: '#f9f9f9',
+    flex: 1,
   },
-  picker: {
-    height: 50,
-    width: 250,
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  buddyItem: {
+    padding: 15,
+    marginVertical: 5,
+    backgroundColor: '#e3f2fd',
+    borderRadius: 5,
+    elevation: 2, // Adds shadow effect on Android
+  },
+  buddyText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  noBuddiesText: {
+    textAlign: 'center',
+    color: '#999',
+    fontSize: 16,
+    marginTop: 20,
   },
   selectedText: {
     marginTop: 20,
     fontSize: 16,
+    fontWeight: 'bold',
   },
 });
